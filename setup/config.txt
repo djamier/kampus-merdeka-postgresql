@@ -20,14 +20,13 @@ create table ms_product (
     , updated_ts timestamp
 );
 
--- insert values product
-insert into ms_product values (1,'topi','system',current_timestamp,null,null);
-insert into ms_product values (2,'baju','system',current_timestamp,null,null);
-insert into ms_product values (3,'jaket','system',current_timestamp,null,null);
-insert into ms_product values (4,'celana panjang','system',current_timestamp,null,null);
-insert into ms_product values (5,'celana pendek','system',current_timestamp,null,null);
+-- insert data into ms_product
+insert into ms_product values (1,'topi','system','2023-01-01 00:00:00.000',null,null);
+insert into ms_product values (2,'baju','system','2023-01-01 00:00:00.000',null,null);
+insert into ms_product values (3,'jaket','system','2023-01-01 00:00:00.000',null,null);
+insert into ms_product values (4,'celana panjang','system','2023-01-01 00:00:00.000',null,null);
+insert into ms_product values (5,'celana pendek','system','2023-01-01 00:00:00.000',null,null);
 
-select * from ms_product;
 
 -- create table ms_order_status
 create table ms_order_status (
@@ -39,6 +38,12 @@ create table ms_order_status (
     , updated_ts timestamp
 );
 
+-- insert data into table ms_order_status
+insert into ms_order_status values (1, 'on process', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_order_status values (2, 'completed', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_order_status values (3, 'canceled', 'system', '2023-01-01 00:00:00.000', null, null);
+
+
 -- create table ms_provinces
 create table ms_provinces (
     id serial primary key
@@ -48,6 +53,10 @@ create table ms_provinces (
     , updated_by varchar(100)
     , updated_ts timestamp
 );
+
+-- insert data into table ms_provinces
+insert into ms_provinces values (1, 'dki jakarta', 'system', '2023-01-01 00:00:00.000', null, null);
+
 
 -- create table ms_cities
 create table ms_cities (
@@ -59,5 +68,13 @@ create table ms_cities (
     , created_ts timestamp
     , updated_by varchar(100)
     , updated_ts timestamp
-    foreign key (province_id) references ms_provinces (id)
+    , foreign key (province_id) references ms_provinces (id)
 );
+
+-- insert data intoto table ms_cities
+insert into ms_cities values (1, 1, 'kota', 'jakarta timur', 'system', current_timestamp, null, null);
+insert into ms_cities values (2, 1, 'kota', 'jakarta selatan', 'system', current_timestamp, null, null);
+insert into ms_cities values (3, 1, 'kota', 'jakarta pusat', 'system', current_timestamp, null, null);
+insert into ms_cities values (4, 1, 'kota', 'jakarta utara', 'system', current_timestamp, null, null);
+insert into ms_cities values (5, 1, 'kota', 'jakarta barat', 'system', current_timestamp, null, null);
+insert into ms_cities values (6, 1, 'kabupaten', 'kepulauan seribu', 'system', current_timestamp, null, null);
