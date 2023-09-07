@@ -1,25 +1,52 @@
--- create schema msib
+-- create schema kampus_merdeka
 do $$ 
 begin
     if not exists (
-    	select 1 from information_schema.schemata where schema_name = 'msib') then
-        execute 'create schema msib';
+    	select 1 from information_schema.schemata where schema_name = 'kampus_merdeka') then
+        execute 'create schema kampus_merdeka';
     end if;
 end $$;
 
--- use schema msib
-set search_path to msib;
+
+-- use schema kampus_merdeka
+set search_path to kampus_merdeka;
+
+
+-- create table ms_order_status
+create table ms_order_status (
+    statusID serial primary key
+    , status_name varchar(25)
+    , created_by varchar(100)
+    , created_ts timestamp
+    , updated_by varchar(100)
+    , updated_ts timestamp
+);
+-- insert data into table ms_order_status
+insert into ms_order_status values (1, 'on process', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_order_status values (2, 'completed', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_order_status values (3, 'canceled', 'system', '2023-01-01 00:00:00.000', null, null);
+
+
+-- create table ms_customers
+create table ms_customers(
+customerID serial primary key
+, first_name varchar(100)
+, last_name varchar (100)
+, email varchar(50)
+);
+-- insert data into table ms_customers
+insert into ms_customers values(1,'sastrio','djamier','sastrio@gmail.com');
+
 
 -- create table ms_product
 create table ms_product (
-    id serial primary key
+    productID serial primary key
     , product_name varchar(25)
     , created_by varchar(100)
     , created_ts timestamp
     , updated_by varchar(100)
     , updated_ts timestamp
 );
-
 -- insert data into ms_product
 insert into ms_product values (1,'topi','system','2023-01-01 00:00:00.000',null,null);
 insert into ms_product values (2,'baju','system','2023-01-01 00:00:00.000',null,null);
@@ -28,53 +55,51 @@ insert into ms_product values (4,'celana panjang','system','2023-01-01 00:00:00.
 insert into ms_product values (5,'celana pendek','system','2023-01-01 00:00:00.000',null,null);
 
 
--- create table ms_order_status
-create table ms_order_status (
-    id serial primary key
-    , status_name varchar(25)
-    , created_by varchar(100)
-    , created_ts timestamp
-    , updated_by varchar(100)
-    , updated_ts timestamp
-);
-
--- insert data into table ms_order_status
-insert into ms_order_status values (1, 'on process', 'system', '2023-01-01 00:00:00.000', null, null);
-insert into ms_order_status values (2, 'completed', 'system', '2023-01-01 00:00:00.000', null, null);
-insert into ms_order_status values (3, 'canceled', 'system', '2023-01-01 00:00:00.000', null, null);
-
-
 -- create table ms_provinces
 create table ms_provinces (
-    id serial primary key
+    provinceID serial primary key
     , province_name varchar(100)
     , created_by varchar(100)
     , created_ts timestamp
     , updated_by varchar(100)
     , updated_ts timestamp
 );
-
 -- insert data into table ms_provinces
 insert into ms_provinces values (1, 'dki jakarta', 'system', '2023-01-01 00:00:00.000', null, null);
 
 
 -- create table ms_cities
 create table ms_cities (
-    id serial primary key
-    , province_id integer
+    cityID serial primary key
+    , provinceID integer
     , city_level varchar(100)
     , city varchar(100)
     , created_by varchar(100)
     , created_ts timestamp
     , updated_by varchar(100)
     , updated_ts timestamp
-    , foreign key (province_id) references ms_provinces (id)
+    , foreign key (provinceID) references ms_provinces (provinceID)
 );
-
--- insert data intoto table ms_cities
+-- insert data into table ms_cities
 insert into ms_cities values (1, 1, 'kota', 'jakarta timur', 'system', current_timestamp, null, null);
 insert into ms_cities values (2, 1, 'kota', 'jakarta selatan', 'system', current_timestamp, null, null);
 insert into ms_cities values (3, 1, 'kota', 'jakarta pusat', 'system', current_timestamp, null, null);
 insert into ms_cities values (4, 1, 'kota', 'jakarta utara', 'system', current_timestamp, null, null);
 insert into ms_cities values (5, 1, 'kota', 'jakarta barat', 'system', current_timestamp, null, null);
 insert into ms_cities values (6, 1, 'kabupaten', 'kepulauan seribu', 'system', current_timestamp, null, null);
+
+
+-- create table ms_departments
+create table ms_departments (
+	departmentID serial primary key,
+	department_name varchar (100) not null
+);
+-- insert data into ms_departments
+
+
+-- create table ms_departments
+create table ms_employees (
+	employeeID serial PRIMARY KEY,
+	employee_name varchar (100),
+	departmentID integer
+);
