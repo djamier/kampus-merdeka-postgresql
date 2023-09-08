@@ -29,10 +29,10 @@ insert into ms_order_status values (3, 'canceled', 'system', '2023-01-01 00:00:0
 
 -- create table ms_customers
 create table ms_customers(
-customerID serial primary key
-, first_name varchar(100)
-, last_name varchar (100)
-, email varchar(50)
+    customerID serial primary key
+    , first_name varchar(100)
+    , last_name varchar (100)
+    , email varchar(50)
 );
 -- insert data into table ms_customers
 insert into ms_customers values(1,'sastrio','djamier','sastrio@gmail.com');
@@ -91,10 +91,11 @@ insert into ms_cities values (6, 1, 'kabupaten', 'kepulauan seribu', 'system', c
 
 -- create table ms_departments
 create table ms_departments (
-	departmentID serial primary key,
-	department_name varchar (100) not null
+	departmentID serial primary key
+	, department_name varchar (100) not null
 );
 -- insert data into ms_departments
+insert into ms_departments (department_name) values ('Finance'),('Marketing'),('HR'),('IT');
 
 
 -- create table ms_departments
