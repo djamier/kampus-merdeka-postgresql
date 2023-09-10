@@ -104,3 +104,9 @@ create table ms_employees (
 	employee_name varchar (100),
 	departmentID integer
 );
+
+
+copy tr_online_orders (column_name_1 column_nam2)
+from 'path\tr_online_orders.csv'
+delimeter ','
+csv header;
