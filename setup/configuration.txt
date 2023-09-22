@@ -14,7 +14,7 @@ set search_path to kampus_merdeka;
 
 -- create table ms_order_status
 create table ms_order_status (
-    statusID serial primary key
+    status_id serial primary key
     , status_name varchar(25)
     , created_by varchar(100)
     , created_ts timestamp
@@ -29,7 +29,7 @@ insert into ms_order_status values (3, 'canceled', 'system', '2023-01-01 00:00:0
 
 -- create table ms_customers
 create table ms_customers(
-    customerID serial primary key
+    customer_id serial primary key
     , first_name varchar(100)
     , last_name varchar (100)
     , email varchar(50)
@@ -40,7 +40,7 @@ insert into ms_customers values(1,'sastrio','djamier','sastrio@gmail.com');
 
 -- create table ms_product
 create table ms_product (
-    productID serial primary key
+    product_id serial primary key
     , product_name varchar(25)
     , created_by varchar(100)
     , created_ts timestamp
@@ -70,15 +70,15 @@ insert into ms_provinces values (1, 'dki jakarta', 'system', '2023-01-01 00:00:0
 
 -- create table ms_cities
 create table ms_cities (
-    cityID serial primary key
-    , provinceID integer
+    city_id serial primary key
+    , province_id integer
     , city_level varchar(100)
     , city varchar(100)
     , created_by varchar(100)
     , created_ts timestamp
     , updated_by varchar(100)
     , updated_ts timestamp
-    , foreign key (provinceID) references ms_provinces (provinceID)
+    , foreign key (province_id) references ms_provinces (province_id)
 );
 -- insert data into table ms_cities
 insert into ms_cities values (1, 1, 'kota', 'jakarta timur', 'system', current_timestamp, null, null);
@@ -91,7 +91,7 @@ insert into ms_cities values (6, 1, 'kabupaten', 'kepulauan seribu', 'system', c
 
 -- create table ms_departments
 create table ms_departments (
-	departmentID serial primary key
+	department_id serial primary key
 	, department_name varchar (100) not null
 );
 -- insert data into ms_departments
@@ -100,13 +100,13 @@ insert into ms_departments (department_name) values ('Finance'),('Marketing'),('
 
 -- create table ms_departments
 create table ms_employees (
-	employeeID serial PRIMARY KEY,
-	employee_name varchar (100),
-	departmentID integer
+	employee_id serial primary key
+	, employee_name varchar (100)
+	, department_id integer
 );
 
 
-copy tr_online_orders (column_name_1 column_nam2)
+copy tr_offline_order_items (id , orderid, productid, qty, unit_price, price)
 from 'path\tr_online_orders.csv'
 delimeter ','
 csv header;
