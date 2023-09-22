@@ -1,15 +1,15 @@
--- create schema kampus_merdeka
+-- create schema kampus_merdeka_dibimbing
 do $$ 
 begin
     if not exists (
-    	select 1 from information_schema.schemata where schema_name = 'kampus_merdeka') then
-        execute 'create schema kampus_merdeka';
+    	select 1 from information_schema.schemata where schema_name = 'kampus_merdeka_dibimbing') then
+        execute 'create schema kampus_merdeka_dibimbing';
     end if;
 end $$;
 
 
--- use schema kampus_merdeka
-set search_path to kampus_merdeka;
+-- use schema kampus_merdeka_dibimbing
+set search_path to kampus_merdeka_dibimbing;
 
 
 -- create table ms_order_status
@@ -57,7 +57,7 @@ insert into ms_product values (5,'celana pendek','system','2023-01-01 00:00:00.0
 
 -- create table ms_provinces
 create table ms_provinces (
-    provinceID serial primary key
+    province_id serial primary key
     , province_name varchar(100)
     , created_by varchar(100)
     , created_ts timestamp
@@ -81,12 +81,12 @@ create table ms_cities (
     , foreign key (province_id) references ms_provinces (province_id)
 );
 -- insert data into table ms_cities
-insert into ms_cities values (1, 1, 'kota', 'jakarta timur', 'system', current_timestamp, null, null);
-insert into ms_cities values (2, 1, 'kota', 'jakarta selatan', 'system', current_timestamp, null, null);
-insert into ms_cities values (3, 1, 'kota', 'jakarta pusat', 'system', current_timestamp, null, null);
-insert into ms_cities values (4, 1, 'kota', 'jakarta utara', 'system', current_timestamp, null, null);
-insert into ms_cities values (5, 1, 'kota', 'jakarta barat', 'system', current_timestamp, null, null);
-insert into ms_cities values (6, 1, 'kabupaten', 'kepulauan seribu', 'system', current_timestamp, null, null);
+insert into ms_cities values (1, 1, 'kota', 'jakarta timur', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_cities values (2, 1, 'kota', 'jakarta selatan', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_cities values (3, 1, 'kota', 'jakarta pusat', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_cities values (4, 1, 'kota', 'jakarta utara', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_cities values (5, 1, 'kota', 'jakarta barat', 'system', '2023-01-01 00:00:00.000', null, null);
+insert into ms_cities values (6, 1, 'kabupaten', 'kepulauan seribu', 'system', '2023-01-01 00:00:00.000', null, null);
 
 
 -- create table ms_departments
@@ -95,18 +95,19 @@ create table ms_departments (
 	, department_name varchar (100) not null
 );
 -- insert data into ms_departments
-insert into ms_departments (department_name) values ('Finance'),('Marketing'),('HR'),('IT');
+insert into ms_departments (department_name) 
+values 
+('Finance'),
+('Marketing'),
+('HR'),
+('IT');
 
 
--- create table ms_departments
+-- create table ms_employees
 create table ms_employees (
 	employee_id serial primary key
 	, employee_name varchar (100)
 	, department_id integer
 );
-
-
-copy tr_offline_order_items (id , orderid, productid, qty, unit_price, price)
-from 'path\tr_online_orders.csv'
-delimeter ','
-csv header;
+-- insert data into ms_employees
+-- not yet
