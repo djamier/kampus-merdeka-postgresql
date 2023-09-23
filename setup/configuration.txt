@@ -106,8 +106,7 @@ values
 -- create table ms_employees
 create table ms_employees (
 	employee_id serial primary key
-	, employee_name varchar (100)
+	, employee_first_name varchar (100)
+    , employee_last_name varchar (100)
 	, department_id integer
 );
--- insert data into ms_employees
--- not yet
