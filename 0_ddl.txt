@@ -1,11 +1,19 @@
+-- add kolom baru
 alter table ms_employees
 add column employee_position varchar(255);
 
+-- update datatype kolom
 alter table ms_employees
 alter column employee_position varchar(100);
 
+-- add kolom baru menggunakan check constraint hanya 2 value dibawah saja yang masuk
+alter table ms_employees
+add column gender varchar(50) check (gender in ('male', 'female'));
+
+-- drop kolom dalam sebuah table
 alter table ms_employees
 drop column employee_position;
 
+-- ganti nama table
 alter table ms_employees
 rename to employees;
