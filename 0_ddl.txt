@@ -1,0 +1,11 @@
+alter table ms_employees
+add column employee_position varchar(255);
+
+alter table ms_employees
+alter column employee_position varchar(100);
+
+alter table ms_employees
+drop column employee_position;
+
+alter table ms_employees
+rename to employees;
