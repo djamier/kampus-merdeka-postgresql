@@ -1,0 +1,15 @@
+create or replace procedure proc_update_product_price(
+   p_product_name varchar	
+   , p_percetage float
+)
+language plpgsql as $$
+begin
+    
+    update ms_product
+    set unit_price = unit_price + (unit_price * p_percetage)
+    where product_name  = p_product_name;
+    
+    commit;
+end;$$
+
+call proc_update_product_price('jaket', 0.10);
