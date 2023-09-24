@@ -1,0 +1,24 @@
+create or replace function func_sum_by_product(
+    first_parameter varchar
+)
+returns table (
+	product_name varchar
+	, qty_sold int
+)
+language plpgsql as $$
+begin
+    return query
+    select
+        c.product_name
+        , sum(b.qty)::int as qty_sold
+    from orders as a
+    inner join order_details as b
+    	on a.order_id = b.order_id
+    inner join ms_product as c 
+    	on c.product_id = b.product_id
+    where c.product_name = first_parameter
+    group by 1;
+end;
+$$;
+
+select * from func_sum_by_product('jaket')
